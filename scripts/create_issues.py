@@ -5,7 +5,7 @@ from github import Github
 from pathlib import Path
 
 def main():
-    token = os.getenv('GITHUB_TOKEN')
+    token = os.getenv('PERSONAL_ACCESS_TOKEN')
     repo_name = os.getenv('GITHUB_REPOSITORY')
     g = Github(token)
     repo = g.get_repo(repo_name)
