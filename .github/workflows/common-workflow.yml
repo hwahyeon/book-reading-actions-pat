@@ -10,11 +10,11 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout book-reading-actions repository
+      - name: Checkout book-reading-actions-pat repository
         uses: actions/checkout@v2
         with:
-          repository: hwahyeon/book-reading-actions
-          path: book-reading-actions
+          repository: hwahyeon/book-reading-actions-pat
+          path: book-reading-actions-pat
 
       - name: Checkout target repository
         uses: actions/checkout@v2
@@ -32,18 +32,18 @@ jobs:
       - name: Create Issues for Chapters
         run: |
           echo "Running create_issues.py"
-          python ../book-reading-actions/scripts/create_issues.py
+          python ../book-reading-actions-pat/scripts/create_issues.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: target-repo
 
       - name: Close Issues for Completed Chapters
         run: |
           echo "Running close_issues.py"
-          python ../book-reading-actions/scripts/close_issues.py
+          python ../book-reading-actions-pat/scripts/close_issues.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: target-repo
 
@@ -60,4 +60,4 @@ jobs:
             echo "No changes to commit"
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
